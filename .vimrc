@@ -14,14 +14,9 @@ nnoremap <f3> <C-w>-
 nnoremap <f4> <C-w>+
 nnoremap <f9> <C-w>>
 nnoremap <f10> <C-w><
-
 nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
 nnoremap <f12> :YcmCompleter GoTo<CR>
 nnoremap <f11> :YcmCompleter FixIt<CR>
-
-map <leader>tt :lopen<CR>
-map <leader>- :lprevious<CR>
-map <leader>= :lnext<CR>
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -45,14 +40,34 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plugin 'junegunn/fzf.vim'
-  
+Plugin 'SirVer/ultisnips'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:clang_format#code_style = 'google'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 1
+
+set switchbuf+=usetab,newtab
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+
 
 set completeopt-=preview
 
