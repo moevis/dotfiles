@@ -43,7 +43,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'wellle/targets.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'easymotion/vim-easymotion'
-
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plugin 'junegunn/fzf.vim'
+  
 call vundle#end()            " required
 filetype plugin indent on    " required
 
