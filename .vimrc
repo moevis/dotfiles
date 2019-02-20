@@ -62,7 +62,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 1
 
-set switchbuf+=usetab,newtab
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                         fzf#vim#with_preview('right', '?'),
+  \                 <bang>0)
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -70,10 +73,11 @@ let g:go_highlight_functions = 1
 
 
 set completeopt-=preview
-
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeWinPos = "left"
+let NERDTreeIgnore = ['\.pyc$', '\.o$']
 
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
