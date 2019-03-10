@@ -1,76 +1,50 @@
-set runtimepath+=~/.vim_runtime
-
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
-
 set exrc
 set secure
+set background=dark
 
-" let ale_cpp_gcc_options="-I/usr/include"
+set nocompatible
 
-nnoremap <f3> <C-w>-
-nnoremap <f4> <C-w>+
-nnoremap <f9> <C-w>>
-nnoremap <f10> <C-w><
-nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
-nnoremap <f12> :YcmCompleter GoTo<CR>
-nnoremap <f11> :YcmCompleter FixIt<CR>
+let g:mapleader = ','
+set cmdheight=2
+set ruler
+set wildmenu
+set nobackup
+set nowb
+set noswapfile
+set laststatus=2
+set cursorline
+hi CursorLine ctermbg=235
+map <leader>q :e ~/buffer<cr>
+map <leader>pp :setlocal paste!<cr>
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'tcnksm/gotests', { 'rtp': 'editor/vim' }
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'wellle/targets.vim'
-Plugin 'kana/vim-textobj-user'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-surround'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:clang_format#code_style = 'google'
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-
+Plugin 'airblade/vim-gitgutter.git'
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
 let g:gitgutter_enabled = 1
-let g:gitgutter_highlight_lines = 1
 
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                         fzf#vim#with_preview('right', '?'),
-  \                 <bang>0)
+Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-commentary'
+Plugin 'godlygeek/tabular'
 
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
+Plugin 'scrooloose/nerdtree.git'
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark 
+map <leader>nf :NERDTreeFind<cr>
 
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeWinSize=35
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 set completeopt-=preview
 let g:NERDTreeQuitOnOpen = 1
@@ -92,4 +66,64 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+Plugin 'vim-scripts/mru.vim'
+map <leader>o :BufExplorer<cr>
+
+Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'jiangmiao/auto-pairs'
+
+Plugin 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'easymotion/vim-easymotion'
+
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                         fzf#vim#with_preview('right', '?'),
+  \                 <bang>0)
+
+Plugin 'junegunn/fzf.vim'
+Plugin 'wellle/targets.vim'
+
+Plugin 'rhysd/vim-clang-format'
+map <leader>ff :ClangFormat<cr>
+let g:clang_format#code_style = 'google'
+
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
+nnoremap <f12> :YcmCompleter GoTo<CR>
+
+Plugin 'SirVer/ultisnips'
+
+
+Plugin 'morhetz/gruvbox'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+nnoremap <f3> <C-w>-
+nnoremap <f4> <C-w>+
+nnoremap <f9> <C-w>>
+nnoremap <f10> <C-w><
+
+set smartindent
+set autoindent
+set tabstop=2
+set softtabstop=2
 set shiftwidth=2
+set showmatch
+set expandtab
+
+colorscheme gruvbox
