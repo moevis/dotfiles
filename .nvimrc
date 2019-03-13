@@ -13,11 +13,12 @@ set nowb
 set noswapfile
 set laststatus=2
 set cursorline
+set ignorecase
+set smartcase
+
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -86,6 +87,25 @@ command! -bang -nargs=* Ag
   \                         fzf#vim#with_preview('right', '?'),
   \                 <bang>0)
 
+nnoremap <silent> K :call SearchWordWithAg()<CR>
+vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+
+function! SearchWordWithAg()
+  execute 'Ag' expand('<cword>')
+endfunction
+
+function! SearchVisualSelectionWithAg() range
+  let old_reg = getreg('"')
+  let old_regtype = getregtype('"')
+  let old_clipboard = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', old_reg, old_regtype)
+  let &clipboard = old_clipboard
+  execute 'Ag' selection
+endfunction
+ 
 Plugin 'junegunn/fzf.vim'
 Plugin 'wellle/targets.vim'
 
@@ -117,6 +137,7 @@ nnoremap <f3> <C-w>-
 nnoremap <f4> <C-w>+
 nnoremap <f9> <C-w>>
 nnoremap <f10> <C-w><
+nnoremap <leader>s :w<cr>
 
 set smartindent
 set autoindent
@@ -127,3 +148,20 @@ set showmatch
 set expandtab
 
 colorscheme gruvbox
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
