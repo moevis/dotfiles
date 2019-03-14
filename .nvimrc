@@ -19,6 +19,8 @@ set smartcase
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -36,7 +38,7 @@ Plugin 'godlygeek/tabular'
 
 Plugin 'scrooloose/nerdtree.git'
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark 
+map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
 let NERDTreeHighlightCursorline=1
@@ -77,7 +79,19 @@ Plugin 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'itchyny/vim-gitbranch'
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name',
+      \   'charvaluehex': '0x%B'
+      \ },
+      \ }
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'easymotion/vim-easymotion'
 
@@ -86,7 +100,6 @@ command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                         fzf#vim#with_preview('right', '?'),
   \                 <bang>0)
-
 nnoremap <silent> K :call SearchWordWithAg()<CR>
 vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 
@@ -105,7 +118,7 @@ function! SearchVisualSelectionWithAg() range
   let &clipboard = old_clipboard
   execute 'Ag' selection
 endfunction
- 
+
 Plugin 'junegunn/fzf.vim'
 Plugin 'wellle/targets.vim'
 
@@ -118,15 +131,16 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
 nnoremap <f12> :YcmCompleter GoTo<CR>
 
 Plugin 'SirVer/ultisnips'
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
+Plugin 'kien/ctrlp.vim'
+nnoremap <leader>. :CtrlPTag<cr>
 
 Plugin 'morhetz/gruvbox'
 
@@ -137,7 +151,6 @@ nnoremap <f3> <C-w>-
 nnoremap <f4> <C-w>+
 nnoremap <f9> <C-w>>
 nnoremap <f10> <C-w><
-nnoremap <leader>s :w<cr>
 
 set smartindent
 set autoindent
@@ -148,20 +161,3 @@ set showmatch
 set expandtab
 
 colorscheme gruvbox
-
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
