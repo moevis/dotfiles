@@ -19,6 +19,8 @@ set smartcase
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
+map <leader>] :cnext<cr>
+map <leader>[ :cprev<cr>
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
