@@ -21,6 +21,8 @@ map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
 map <leader>] :cnext<cr>
 map <leader>[ :cprev<cr>
+map <f2> :LeaderfFunction!<cr>
+
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
@@ -141,8 +143,7 @@ nnoremap <f12> :YcmCompleter GoTo<CR>
 Plugin 'SirVer/ultisnips'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-Plugin 'kien/ctrlp.vim'
-nnoremap <leader>. :CtrlPTag<cr>
+Plugin 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 Plugin 'morhetz/gruvbox'
 
