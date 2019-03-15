@@ -145,6 +145,10 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 Plugin 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
+Plugin 'junegunn/vim-peekaboo'
+let g:peekaboo_window='vert bo 50new'
+let g:peekaboo_prefix='<leader>'
+
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()            " required
