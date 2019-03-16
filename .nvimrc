@@ -36,20 +36,19 @@ vnoremap <silent> * :call VisualSelection('f')<cr>
 vnoremap <silent> # :call VisualSelection('b')<cr>
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-surround'
+call plug#begin()
+Plug 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-surround'
 
-Plugin 'airblade/vim-gitgutter.git'
+Plug 'airblade/vim-gitgutter'
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 let g:gitgutter_enabled = 1
 
-Plugin 'terryma/vim-expand-region'
-Plugin 'tpope/vim-commentary'
-Plugin 'godlygeek/tabular'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-commentary'
+Plug 'godlygeek/tabular'
 
-Plugin 'scrooloose/nerdtree.git'
+Plug 'scrooloose/nerdtree'
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
@@ -60,7 +59,7 @@ let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 let g:NERDTreeWinSize=35
 
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 set completeopt-=preview
 let g:NERDTreeQuitOnOpen = 1
@@ -82,18 +81,18 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-Plugin 'vim-scripts/mru.vim'
+Plug 'vim-scripts/mru.vim'
 map <leader>o :BufExplorer<cr>
 
-Plugin 'yuttie/comfortable-motion.vim'
-Plugin 'jiangmiao/auto-pairs'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'jiangmiao/auto-pairs'
 
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
-Plugin 'itchyny/vim-gitbranch'
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
@@ -105,10 +104,10 @@ let g:lightline = {
       \   'charvaluehex': '0x%B'
       \ },
       \ }
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'easymotion/vim-easymotion'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'easymotion/vim-easymotion'
 
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                         fzf#vim#with_preview('right', '?'),
@@ -132,14 +131,14 @@ function! SearchVisualSelectionWithAg() range
   execute 'Ag' selection
 endfunction
 
-Plugin 'junegunn/fzf.vim'
-Plugin 'wellle/targets.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'wellle/targets.vim'
 
-Plugin 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 map <leader>ff :ClangFormat<cr>
 let g:clang_format#code_style = 'google'
 
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -149,24 +148,24 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
 nnoremap <f12> :YcmCompleter GoTo<CR>
 
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-Plugin 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
-Plugin 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
 let g:peekaboo_prefix='<leader>'
 
-Plugin 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 let g:asyncrun_open = 8
 
-Plugin 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
 let g:echodoc_enable_at_startup = 1
 
-Plugin 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
-call vundle#end()            " required
+call plug#end()
 filetype plugin indent on    " required
 
 nnoremap <f3> <C-w>-
