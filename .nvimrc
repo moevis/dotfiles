@@ -146,8 +146,6 @@ nnoremap <f11> :YcmCompleter FixIt<CR>
 Plug 'SirVer/ultisnips'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
 let g:peekaboo_prefix='<leader>'
@@ -169,17 +167,15 @@ Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_project_root = ['.root', '.git', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_modules = []
-if executable('ctags')
-  let g:gutentags_modules += ['ctags']
-endif
 if executable('gtags-cscope') && executable('gtags')
   let g:gutentags_modules += ['gtags_cscope']
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+set csprg='gtags-cscope'
+set cscopeprg='gtags-cscope'
+let g:gutentags_auto_add_gtags_cscope = 0
+noremap <silent> <leader>sI :GscopeFind i <C-R>=expand("%:t")<cr><cr>
 
 Plug 'skywind3000/gutentags_plus'
 let g:gutentags_plus_switch = 1
