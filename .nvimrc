@@ -31,6 +31,7 @@ map <f5> :AsyncRun -program=make<cr>
 map <f2> :LeaderfFunction!<cr>
 nnoremap <c-right> :tabnext<cr>
 nnoremap <c-left> :tabprevious<cr><paste>
+map <f10> :call <SID>ToggleQf()<cr>
 
 vnoremap <silent> * :call VisualSelection('f')<cr>
 vnoremap <silent> # :call VisualSelection('b')<cr>
@@ -39,10 +40,6 @@ filetype off
 call plug#begin()
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-surround'
-
-Plug 'airblade/vim-gitgutter'
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-let g:gitgutter_enabled = 1
 
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-commentary'
@@ -80,9 +77,6 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
-
-Plug 'vim-scripts/mru.vim'
-map <leader>o :BufExplorer<cr>
 
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -134,9 +128,9 @@ endfunction
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
 
-Plug 'rhysd/vim-clang-format'
-map <leader>ff :ClangFormat<cr>
-let g:clang_format#code_style = 'google'
+Plug 'Chiel92/vim-autoformat'
+let g:formatdef_clangformat = '"clang-format -style=google"'
+map <leader>ff :Autoformat<cr>
 
 Plug 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -147,6 +141,7 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
 nnoremap <f12> :YcmCompleter GoTo<CR>
+nnoremap <f11> :YcmCompleter FixIt<CR>
 
 Plug 'SirVer/ultisnips'
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -163,15 +158,41 @@ let g:asyncrun_open = 8
 Plug 'Shougo/echodoc.vim'
 let g:echodoc_enable_at_startup = 1
 
-Plug 'morhetz/gruvbox'
+Plug 'mhinz/vim-signify'
 
+Plug 'godlygeek/tabular'
+map <leader>a= :Tabularize /=<cr>
+map <leader>a: :Tabularize /:<cr>
+map <leader>a, :Tabularize /,<cr>
+
+Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_project_root = ['.root', '.git', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_modules = []
+if executable('ctags')
+  let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+  let g:gutentags_modules += ['gtags_cscope']
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
+endif
+
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+Plug 'skywind3000/gutentags_plus'
+let g:gutentags_plus_switch = 1
+
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+map <f4> :LeaderfBufferAll<cr>
+map <f3> :Leaderf mru --regexMode<cr>
+map <f2> :LeaderfFunction!<cr>
+map <f1> :LeaderfTag<cr>
+
+Plug 'morhetz/gruvbox'
 call plug#end()
 filetype plugin indent on    " required
-
-nnoremap <f3> <C-w>-
-nnoremap <f4> <C-w>+
-nnoremap <f9> <C-w>>
-nnoremap <f10> <C-w><
 
 set smartindent
 set autoindent
@@ -198,4 +219,16 @@ function! VisualSelection(direction, extra_filter) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+function! s:ToggleQf()
+  for buffer in tabpagebuflist()
+    if bufname(buffer) == ''
+      " then it should be the quickfix window
+      cclose
+      return
+    endif
+  endfor
+
+  copen
 endfunction
