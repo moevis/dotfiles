@@ -91,13 +91,16 @@ let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'charvaluehex' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'gitbranch#name',
-      \   'charvaluehex': '0x%B'
       \ },
+      \ 'component': {
+      \    'charvaluehex': '0x%B'
       \ }
+      \ }
+
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'easymotion/vim-easymotion'
 
@@ -127,6 +130,7 @@ endfunction
 
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
+Plug 'fatih/vim-go'
 
 Plug 'Chiel92/vim-autoformat'
 let g:formatdef_clangformat = '"clang-format -style=google"'
@@ -186,6 +190,7 @@ map <f3> :Leaderf mru --regexMode<cr>
 map <f2> :LeaderfFunction!<cr>
 map <f1> :LeaderfTag<cr>
 
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 call plug#end()
 filetype plugin indent on    " required
