@@ -20,6 +20,11 @@ set cursorline
 set ignorecase
 set smartcase
 
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
