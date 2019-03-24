@@ -1,3 +1,5 @@
+# wget https://github.com/junegunn/fzf-bin/releases/download/0.17.5/fzf-0.17.5-linux_amd64.tgz
+
 case $SHELL in
 */zsh)
   wget https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
