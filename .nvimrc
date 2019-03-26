@@ -24,6 +24,7 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+nnoremap gp `[v`]
 
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
