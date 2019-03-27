@@ -48,7 +48,10 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-surround'
 
 Plug 'terryma/vim-expand-region'
+
 Plug 'tpope/vim-commentary'
+autocmd FileType c,cpp,json setlocal commentstring=//\ %s
+
 Plug 'godlygeek/tabular'
 
 Plug 'scrooloose/nerdtree'
@@ -211,7 +214,7 @@ set expandtab
 
 colorscheme gruvbox
 
-function! VisualSelection(direction, extra_filter) range
+function! VisualSelection(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
 
