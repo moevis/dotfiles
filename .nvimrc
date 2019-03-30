@@ -29,6 +29,9 @@ nnoremap gp `[v`]
 hi CursorLine ctermbg=235
 map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
+map <leader>y "+y<cr>
+map <leader>p "+p<cr>
+map <leader>d "_d<cr>
 map <leader>] :cnext<cr>
 map <leader>[ :cprev<cr>
 map <leader>- :ALEPrevious<cr>
@@ -36,7 +39,8 @@ map <leader>= :ALENext<cr>
 map <f5> :AsyncRun -program=make<cr>
 map <f2> :LeaderfFunction!<cr>
 nnoremap <c-right> :tabnext<cr>
-nnoremap <c-left> :tabprevious<cr><paste>
+nnoremap <c-left> :tabprevious<cr>
+nmap <Leader><Leader> V
 map <f10> :call <SID>ToggleQf()<cr>
 
 vnoremap <silent> * :call VisualSelection('f')<cr>
