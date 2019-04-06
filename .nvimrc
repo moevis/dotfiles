@@ -4,6 +4,13 @@ set background=dark
 
 set nocompatible
 
+if filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim")) == 0
+  echoerr "Plug manager not installed, downloading from https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim "
+  call system("mkdir -p ~/.local/share/nvim/site/autoload/ && wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ~/.local/share/nvim/site/autoload/plug.vim")
+  so ~/.local/share/nvim/site/autoload/plug.vim
+endif
+
+
 " persistant undo
 set undodir=~/.vim/undodir
 set undofile
@@ -43,7 +50,7 @@ map <f5> :AsyncRun -program=make<cr>
 map <f2> :LeaderfFunction!<cr>
 nnoremap <c-right> :tabnext<cr>
 nnoremap <c-left> :tabprevious<cr>
-nmap <space><space> V
+nmap <leader><leader> V
 map <f10> :call <SID>ToggleQf()<cr>
 
 vnoremap <silent> * :call VisualSelection('f')<cr>
@@ -51,16 +58,8 @@ vnoremap <silent> # :call VisualSelection('b')<cr>
 
 filetype off
 call plug#begin()
-Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-surround'
-
 Plug 'drmikehenry/vim-headerguard'
-function! g:HeaderguardName()
-  return "PROJECT_" . toupper(expand('%:gs/[^0-9a-zA-Z_]/_/g'))
-endfunction
-
-Plug 'terryma/vim-expand-region'
-Plug 'liuchengxu/vim-which-key'
 Plug 'sbdchd/vim-shebang'
 
 Plug 'tpope/vim-commentary'
@@ -81,7 +80,6 @@ let g:NERDTreeWinSize=35
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-set completeopt-=preview
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
@@ -113,7 +111,7 @@ Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
+      \   'left': [ [ 'mode' ],
       \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'charvaluehex' ] ]
       \ },
       \ 'component_function': {
@@ -129,8 +127,8 @@ Plug 'easymotion/vim-easymotion'
 " <Leader>f{char} to move to {char}
 map  <Leader>t <Plug>(easymotion-bd-f)
 nmap <Leader>t <Plug>(easymotion-overwin-f)
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+map  <space> <Plug>(easymotion-sn)
+omap <space> <Plug>(easymotion-tn)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
@@ -185,15 +183,19 @@ map <leader>ff :Autoformat<cr>
 let g:formatters_python = ['black']
 
 Plug 'Valloric/YouCompleteMe'
+set completeopt-=preview
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-nnoremap <S-f12> :vsplit<bar>YcmCompleter GoTo<CR>
 nnoremap <f12> :YcmCompleter GoTo<CR>
 nnoremap <f11> :YcmCompleter FixIt<CR>
+if 0 == filereadable(expand("~/.config/nvim/.ycm_extra_conf.py"))
+  echo "ycm_extra_conf not found, downloading from https://raw.githubusercontent.com/moevis/dotfiles/master/.ycm_extra_conf.py"
+  call system('wget https://raw.githubusercontent.com/moevis/dotfiles/master/.ycm_extra_conf.py -O ~/.config/nvim/.ycm_extra_conf.py')
+endif
 let g:ycm_use_clangd = 0
 
 Plug 'SirVer/ultisnips'
@@ -330,4 +332,8 @@ function! MoveToNextTab()
   endif
   "opening current buffer in new window
   exe "b".l:cur_buf
+endfunc
+
+function! SetupClang()
+  call system("wget https://raw.githubusercontent.com/moevis/dotfiles/master/.local.nvimrc -O .nvimrc")
 endfunc
