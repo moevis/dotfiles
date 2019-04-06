@@ -26,9 +26,9 @@ noremap <Left> <nop>
 noremap <Right> <nop>
 
 hi CursorLine ctermbg=235
-nnoremap <leader>y "+y<cr>
-nnoremap <leader>p "+p<cr>
-nnoremap <leader>d "_d<cr>
+vnoremap <leader>y "+y<cr>
+map <leader>p "+p<cr>
+vnoremap <leader>d "_d<cr>
 nnoremap gp `[v`]
 nnoremap <leader>g g`"
 map mt :call MoveToNextTab()<cr>
@@ -113,7 +113,7 @@ Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
-      \   'left': [ [ 'mode' ],
+      \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'charvaluehex' ] ]
       \ },
       \ 'component_function': {
