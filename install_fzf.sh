@@ -21,7 +21,7 @@ cd ~
 fzf_key_bindings=`cat key-bindings.${shell}`
 fzf_completion=`cat completion.${shell}`
 
-src_file=".fzf.${shell}"
+src_file="~/.fzf.${shell}"
 
 cat > "$src_file" << EOF
 # Auto-completion
