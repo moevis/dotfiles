@@ -25,25 +25,9 @@ Open a nvim window and type:
 :PlugInstall
 ```
 
-For vim users:
-```shell
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-Setup your `.vimrc`:
-```
-wget https://raw.githubusercontent.com/moevis/dotfiles/master/.nvimrc -O ~/.vimrc
-```
-
-Open a vim window and type:
-```
-:PlugInstall
-```
-
 **One more step for YouCompleteMe**
 
-If you write C/C++ and wanna code completion for c-family languages. You should go to `~/.config/nvim/plugged/YouCompleteMe/`(Neovim) and run `python3 install.py --clang-completer`. Or go to `.vim/plugged/YouCompleteMe` and run `python3 install.py --clang-completer`. Download `https://raw.githubusercontent.com/moevis/dotfiles/master/.ycm_extra_conf.py` and save to `~/.vim/.ycm_extra_conf.py`.
+If you write C/C++ and wanna code completion for c-family languages. You should go to `~/.config/nvim/plugged/YouCompleteMe/`(Neovim) and run `python3 install.py --clang-completer`. When nvim started, a configure file `.ycm_extra_conf.py` will be downloaded and save to `~/.config/nvim/.ycm_extra_conf.py`.
 
 Feel free to edit it to fit into your project, you can have a local copy at the root of your project directory.
 
@@ -97,6 +81,8 @@ Navigate:
 - `<leader>-`: ALEPrevious
 - `<leader>=`: ALENext
 - `ctrl+left/right`: Switch tab
+- `mt`: Move current window into next tab
+- `mT`: Move current window into previous tab
 
 YouCompleteMe:
 - `<f11>`: Fixit
@@ -104,4 +90,7 @@ YouCompleteMe:
 
 Others:
 - `<leader><leader>`: V
+- `<leader>`l: Toggle line number
+- `<leader>`d: Toggle signify highlight
+
 - `<f10>`: toggle quickfix window
