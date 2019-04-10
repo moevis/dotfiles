@@ -43,7 +43,7 @@ map mT :call MoveToPrevTab()<cr>
 map <leader>] :cnext<cr>
 map <leader>[ :cprev<cr>
 map <leader>- :ALEPrevious<cr>
-map <leader>= ,ALENext<cr>
+map <leader>= :ALENext<cr>
 map <leader>l :set invnumber<cr>
 map <leader>d :SignifyToggleHighlight<cr>
 map <f5> :AsyncRun -program=make<cr>
