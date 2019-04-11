@@ -1,26 +1,18 @@
 # My Dotfiles
 
-## vim/nvim
+## nvim
 
 ![vim](vimrc.png)
 
 ### Installation
 
-Please install `vim-plug` first.
+Just one command:
 
-For neovim users:
 ```shell
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/moevis/dotfiles/master/.nvimrc
 ```
 
-Create a new folder and save the nvimrc:
-```
-mkdir -p ~/.config/nvim
-wget https://raw.githubusercontent.com/moevis/dotfiles/master/.nvimrc -O ~/.config/nvim/init.vim
-```
-
-Open a nvim window and type:
+The plugin manager `vim-plug` will be installed when nvim start. To Install the theme and plugins, open a nvim window and type:
 ```shell
 :PlugInstall
 ```
@@ -92,5 +84,4 @@ Others:
 - `<leader><leader>`: V
 - `<leader>`l: Toggle line number
 - `<leader>`d: Toggle signify highlight
-
 - `<f10>`: toggle quickfix window
