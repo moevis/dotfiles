@@ -14,6 +14,7 @@ endif
 " persistant undo
 set undodir=~/.vim/undodir
 set undofile
+set splitright
 
 let g:mapleader = ','
 set cmdheight=2
@@ -50,7 +51,6 @@ map <f5> :AsyncRun -program=make<cr>
 map <f2> :LeaderfFunction!<cr>
 nnoremap <c-right> :tabnext<cr>
 nnoremap <c-left> :tabprevious<cr>
-nmap <leader><leader> V
 map <f10> :call <SID>ToggleQf()<cr>
 
 vnoremap <silent> * :call VisualSelection('f')<cr>
@@ -106,21 +106,26 @@ Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 8
 
+Plug 'tpope/vim-fugitive'
 Plug 'itchyny/vim-gitbranch'
+
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
       \   'left': [ [ 'mode' ],
-      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'charvaluehex' ] ]
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype'] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'gitbranch#name',
       \ },
       \ 'component': {
-      \    'charvaluehex': '0x%B'
       \ }
       \ }
+      
 Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'easymotion/vim-easymotion'
@@ -247,7 +252,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'morhetz/gruvbox'
 call plug#end()
-filetype plugin indent on    " required
+filetype plugin indent on
 
 set smartindent
 set autoindent
