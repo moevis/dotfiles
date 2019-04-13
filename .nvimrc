@@ -41,10 +41,10 @@ nnoremap gp `[v`]
 nnoremap <leader>g g`"
 map mt :call MoveToNextTab()<cr>
 map mT :call MoveToPrevTab()<cr>
-map <leader>] :cnext<cr>
-map <leader>[ :cprev<cr>
-map <leader>- :ALEPrevious<cr>
-map <leader>= :ALENext<cr>
+map [q :cprev<cr>
+map ]q :cnext<cr>
+map [a :ALEPrevious<cr>
+map ]a :ALENext<cr>
 map <leader>l :set invnumber<cr>
 map <leader>d :SignifyToggleHighlight<cr>
 map <f5> :AsyncRun -program=make<cr>
