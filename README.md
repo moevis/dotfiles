@@ -4,6 +4,14 @@
 
 ![vim](vimrc.png)
 
+### Features
+
+- Comfortable color.
+- Linters and completions supported.
+- Quick comments.
+- Code Snipts.
+- Highlight same id.
+
 ### Installation
 
 Just one command:
@@ -48,11 +56,16 @@ endfunction
 - `vim-easymotion`: Type `<leader>t` to jump to char and `<leader>w` to jump to word.
 - `fzf`: Amazing searching tool! Press `K` to search current word under the cursor (requiring `ag`).
 - `targets`: Imporving your motion key.
+- `vim-dirdiff`: Diff files and folders.
+- `vim-illuminate`: hightlight same keyword.
+- `asyncrun.vim`: press `F5` to run make command in async mode.
 - `vim-go`
 - `vim-autoformat`: Press `<leader>ff` to format your code.
 - `YouCompleteMe`
+- `echodoc`: Displays function signatures from completions in the command line.
 - `peekaboo`: View contents of registers.
 - `vim-gutentags`: ctags alternative.
+- `vim-signify`: show file diff marks, press `<leader>d` to toggle line highlighting.
 - `LeaderF`:
   - `<f4>`: Search buffers.
   - `<f3>`: MRU Buffer.
@@ -68,20 +81,36 @@ Copy & Paste:
 - `<leader>d`: Delete content without storing it in register.
 
 Navigate:
-- `<leader>]`: cnext
-- `<leader>[`: cprev
-- `<leader>-`: ALEPrevious
-- `<leader>=`: ALENext
+- `]q`: cprev
+- `[q`: cnext
+- `[a`: ALEPrevious
+- `]a`: ALENext
+- `[c`: previous diff
+- `]c`: next diff
 - `ctrl+left/right`: Switch tab
 - `mt`: Move current window into next tab
 - `mT`: Move current window into previous tab
+- `ctrl+h/j/k/l`: switch window
+
+EasyMotion:
+ - `<leader>t`: Search char
+ - `<leader>w`: Search word
+ - `<space>`: Quick find
 
 YouCompleteMe:
-- `<f11>`: Fixit
-- `<f12>`: GoTo
+ - `<f11>`: Fixit
+ - `<f12>`: GoTo
+
+gtags(c++ only):
+ - `<leader>cs`: Find this symbol
+ - `<leader>cg`: Find this definition
+ - `<leader>cd`: Find functions called by this function
+ - `<leader>cc`: Find functions calling this function
+ - `<leader>ca`: Find places where this symbol is assigned a value
 
 Others:
-- `<leader><leader>`: V
-- `<leader>`l: Toggle line number
-- `<leader>`d: Toggle signify highlight
-- `<f10>`: toggle quickfix window
+ - `<leader>`l: Toggle line number
+ - `<leader>`d: Toggle signify highlight
+ - `<f10>`: toggle quickfix window
+
+**Important**: press `<leader><tab>` to search for short cuts
