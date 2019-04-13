@@ -61,6 +61,8 @@ call plug#begin()
 Plug 'tpope/vim-surround'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'sbdchd/vim-shebang'
+Plug 'will133/vim-dirdiff'
+Plug 'RRethy/vim-illuminate'
 
 Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,json setlocal commentstring=//\ %s
@@ -204,7 +206,7 @@ endif
 let g:ycm_use_clangd = 0
 
 Plug 'SirVer/ultisnips'
-let g:SuperTabDefaultCompletionType = '<C-n>'
+Plug 'honza/vim-snippets'
 
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
