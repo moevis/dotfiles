@@ -25,12 +25,6 @@ The plugin manager `vim-plug` will be installed when nvim start. To Install the 
 :PlugInstall
 ```
 
-**One more step for YouCompleteMe**
-
-If you write C/C++ and wanna code completion for c-family languages. You should go to `~/.config/nvim/plugged/YouCompleteMe/`(Neovim) and run `python3 install.py --clang-completer`. When nvim started, a configure file `.ycm_extra_conf.py` will be downloaded and save to `~/.config/nvim/.ycm_extra_conf.py`.
-
-Feel free to edit it to fit into your project, you can have a local copy at the root of your project directory.
-
 ### Plugin overview
 
 Leader key is mapped to `,`.
@@ -58,7 +52,7 @@ endfunction
 - `asyncrun.vim`: press `F5` to run make command in async mode.
 - `vim-go`
 - `vim-autoformat`: Press `<leader>ff` to format your code.
-- `coc-vim`
+- `coc-vim`: Completion and linters.
 - `vista`
 - `echodoc`: Displays function signatures from completions in the command line.
 - `peekaboo`: View contents of registers.
@@ -70,7 +64,7 @@ endfunction
 Copy & Paste:
 - `<leader>y`: Copy to clipboard
 - `<leader>p`: Paste from clipboard
-- `<leader>d`: Delete content without storing it in register.
+- `<leader>x`: Delete content without storing it in register.
 
 Navigate:
 - `]q`: cprev
@@ -90,8 +84,8 @@ EasyMotion:
  - `<space>`: Quick find
 
 Others:
- - `<leader>`l: Toggle line number
- - `<leader>`d: Toggle signify highlight
+ - `<leader>l`: Toggle line number
+ - `<leader>d`: Toggle signify highlight
  - `<f10>`: toggle quickfix window
 
 **Important**: press `<leader><tab>` to search for short cuts
