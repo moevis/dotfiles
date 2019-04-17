@@ -1,6 +1,6 @@
 # My Dotfiles
 
-## nvim
+## nvim >= 0.4.0 (with floating window feature)
 
 ![vim](vimrc.png)
 
@@ -9,8 +9,8 @@
 - Comfortable color.
 - Linters and completions supported.
 - Quick comments.
-- Code Snipts.
-- Highlight same id.
+- Code Snippts.
+- Auto backup and persistent global undo file.
 
 ### Installation
 
@@ -43,7 +43,6 @@ function! g:HeaderguardName()
 endfunction
 ```
 
-- `vim-expand-region`: Use `+` to expand your selection.
 - `vim-shebang`: Type `:SheBangInsert python` to add shebang to your script.
 - `vim-commentary`: Quick comment/uncomment code by typing `gcc`.
 - `tabular`: Plugin to align your code, mapping to shortcuts like `<leader>a=`, `<leader>a:`, `<leader>a,` .
@@ -51,26 +50,19 @@ endfunction
 - `nerdtree-git-pugin`: Add file status icon according git status in nerdtree.
 - `comfortable-motion`: Use `ctrl+d` and `ctrl+u` to scroll screen smoothly.
 - `auto-pairs`
-- `ale`: Powerful syntax checking tool.
 - `lightline`
 - `vim-easymotion`: Type `<leader>t` to jump to char and `<leader>w` to jump to word.
 - `fzf`: Amazing searching tool! Press `K` to search current word under the cursor (requiring `ag`).
 - `targets`: Imporving your motion key.
 - `vim-dirdiff`: Diff files and folders.
-- `vim-illuminate`: hightlight same keyword.
 - `asyncrun.vim`: press `F5` to run make command in async mode.
 - `vim-go`
 - `vim-autoformat`: Press `<leader>ff` to format your code.
-- `YouCompleteMe`
+- `coc-vim`
+- `vista`
 - `echodoc`: Displays function signatures from completions in the command line.
 - `peekaboo`: View contents of registers.
-- `vim-gutentags`: ctags alternative.
 - `vim-signify`: show file diff marks, press `<leader>d` to toggle line highlighting.
-- `LeaderF`:
-  - `<f4>`: Search buffers.
-  - `<f3>`: MRU Buffer.
-  - `<f2>`: Search functions in the buffer.
-  - `<f1>`: Search tags provided by ctags.
 - `tmux-navigator`: Easily switching bwteen tmux and vim.
 
 ### Shortcuts
@@ -83,8 +75,8 @@ Copy & Paste:
 Navigate:
 - `]q`: cprev
 - `[q`: cnext
-- `[a`: ALEPrevious
-- `]a`: ALENext
+- `[d`: coc-prev
+- `]d`: coc-next
 - `[c`: previous diff
 - `]c`: next diff
 - `ctrl+left/right`: Switch tab
@@ -96,17 +88,6 @@ EasyMotion:
  - `<leader>t`: Search char
  - `<leader>w`: Search word
  - `<space>`: Quick find
-
-YouCompleteMe:
- - `<f11>`: Fixit
- - `<f12>`: GoTo
-
-gtags(c++ only):
- - `<leader>cs`: Find this symbol
- - `<leader>cg`: Find this definition
- - `<leader>cd`: Find functions called by this function
- - `<leader>cc`: Find functions calling this function
- - `<leader>ca`: Find places where this symbol is assigned a value
 
 Others:
  - `<leader>`l: Toggle line number
