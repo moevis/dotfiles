@@ -11,44 +11,63 @@ if filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim")) == 0
 endif
 
 
-" persistant undo
+" backup
+set backup
+set backupdir=~/.vim/backup
+if filereadable(expand("~/.vim/backup")) == 0
+  call system("mkdir -p ~/.vim/backup")
+endif
+set writebackup
+set backupcopy=yes
+au BufWritePre * let &bex = '@' . strftime("%F")
+
+" undo
 set undodir=~/.vim/undodir
 set undofile
-set splitright
 
+set autoread
+set splitright
 let g:mapleader = ','
 set cmdheight=2
-set ruler
+set wildoptions=pum
+set pumblend=20
 set wildmenu
-set nobackup
+" set nobackup
 set nowb
 set noswapfile
+set nu
 set laststatus=2
 set cursorline
 set ignorecase
 set smartcase
 
-noremap <Up> <nop>
-noremap <Down> <nop>
+noremap <Up> :res +3<cr>
+noremap <Down> :res -3<cr> 
 noremap <Left> <nop>
 noremap <Right> <nop>
+noremap <C-Up> :vertical res +3<cr>
+noremap <C-Down> :vertical res -3<cr>
 
-hi CursorLine ctermbg=235
+let g:DirDiffExcludes = "node_modules,.*,CMakeFiles,build,__pycache__"
+autocmd FileType json syntax match Comment +\/\/.\+$+
+tnoremap <esc> <c-\><c-n><cr>
+map <leader>r :checktime<cr>
+
+hi CursorLine ctermbg=248
 vnoremap <leader>y "+y<cr>
 map <leader>p "+p<cr>
-vnoremap <leader>d "_d<cr>
+vnoremap <leader>x "_d<cr>
 nnoremap gp `[v`]
 nnoremap <leader>g g`"
 map mt :call MoveToNextTab()<cr>
 map mT :call MoveToPrevTab()<cr>
 map [q :cprev<cr>
 map ]q :cnext<cr>
-map [a :ALEPrevious<cr>
-map ]a :ALENext<cr>
+" map [a :ALEPrevious<cr>
+" map ]a :ALENext<cr>
 map <leader>l :set invnumber<cr>
 map <leader>d :SignifyToggleHighlight<cr>
 map <f5> :AsyncRun -program=make<cr>
-map <f2> :LeaderfFunction!<cr>
 nnoremap <c-right> :tabnext<cr>
 nnoremap <c-left> :tabprevious<cr>
 map <f10> :call <SID>ToggleQf()<cr>
@@ -61,13 +80,13 @@ call plug#begin()
 Plug 'tpope/vim-surround'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'sbdchd/vim-shebang'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'will133/vim-dirdiff'
-Plug 'RRethy/vim-illuminate'
+Plug 'godlygeek/tabular'
+" Plug 'RRethy/vim-illuminate'
 
 Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,json setlocal commentstring=//\ %s
-
-Plug 'godlygeek/tabular'
 
 Plug 'scrooloose/nerdtree'
 map <leader>nn :NERDTreeToggle<cr>
@@ -104,30 +123,30 @@ let g:NERDTreeIndicatorMapCustom = {
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'w0rp/ale'
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 8
+" Plug 'w0rp/ale'
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 8
 
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/vim-gitbranch'
 
+Plug 'itchyny/vim-gitbranch'
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode' ],
-      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
+      \             [ 'gitbranch', 'cocstatus', 'readonly', 'relativepath', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'filetype'] ]
       \ },
       \ 'component_function': {
+      \   'cocstatus': 'coc#status',
       \   'gitbranch': 'gitbranch#name',
       \ },
       \ 'component': {
       \ }
       \ }
-      
 Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'easymotion/vim-easymotion'
@@ -175,31 +194,69 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
+
 Plug 'fatih/vim-go'
+let g:go_doc_keywordprg_enabled = 0
 
 Plug 'Chiel92/vim-autoformat'
 let g:formatdef_clangformat = '"clang-format -style=google"'
 map <leader>ff :Autoformat<cr>
 let g:formatters_python = ['black']
 
-Plug 'Valloric/YouCompleteMe'
-set completeopt-=preview
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-nnoremap <f12> :YcmCompleter GoTo<CR>
-nnoremap <f11> :YcmCompleter FixIt<CR>
-if 0 == filereadable(expand("~/.config/nvim/.ycm_extra_conf.py"))
-  echo "ycm_extra_conf not found, downloading from https://raw.githubusercontent.com/moevis/dotfiles/master/.ycm_extra_conf.py"
-  call system('wget https://raw.githubusercontent.com/moevis/dotfiles/master/.ycm_extra_conf.py -O ~/.config/nvim/.ycm_extra_conf.py')
-endif
-let g:ycm_use_clangd = 0
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+map <backspace> :nohl<cr>
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[d` and `]d` for navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current
+" paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <f1> :CocList diagnostics<cr>
+nmap <f9> :CocListResume<cr>
+nmap <f11>  <Plug>(coc-fix-current)"
+
+" Use K for show documentation in preview window
+nnoremap <silent> <leader>r :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+Plug 'liuchengxu/vista.vim'
+nmap <f2> :Vista!!<cr>
+let g:vista#enable_icon = 0
+let g:vista_default_executive = 'coc'
+let g:vista_icon_indent = ["▸ ", ""]
 
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
@@ -218,36 +275,11 @@ map <leader>a= :Tab/=<cr>
 map <leader>a: :Tab/:<cr>
 map <leader>a, :Tab/,<cr>
 
-Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_project_root = ['.root', '.git', '.project']
-let g:gutentags_ctags_tagfile = '.tags'
-let g:gutentags_modules = []
-if executable('ctags')
-  let g:gutentags_modules += ['ctags']
-endif
-if executable('gtags-cscope') && executable('gtags')
-  let g:gutentags_modules += ['gtags_cscope']
-  let g:gutentags_cache_dir = expand('~/.cache/tags')
-endif
-
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-Plug 'skywind3000/gutentags_plus'
-let g:gutentags_plus_switch = 1
-
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-map <f4> :LeaderfBufferAll<cr>
-map <f3> :Leaderf mru --regexMode<cr>
-map <f2> :LeaderfFunction!<cr>
-map <f1> :LeaderfTag<cr>
-
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'morhetz/gruvbox'
 call plug#end()
-filetype plugin indent on
+filetype plugin indent on    " required
 
 set smartindent
 set autoindent
@@ -306,7 +338,7 @@ function! MoveToPrevTab()
     vsp
   else
     close!
-    exe "0tabnew"
+    exe "tabnew"
   endif
   "opening current buffer in new window
   exe "b".l:cur_buf
@@ -325,15 +357,11 @@ function! MoveToNextTab()
     if l:tab_nr == tabpagenr('$')
       tabnext
     endif
-    sp
+    vsp
   else
     close!
     tabnew
   endif
   "opening current buffer in new window
   exe "b".l:cur_buf
-endfunc
-
-function! SetupClang()
-  call system("wget https://raw.githubusercontent.com/moevis/dotfiles/master/.local.nvimrc -O .nvimrc")
 endfunc
