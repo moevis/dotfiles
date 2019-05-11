@@ -276,6 +276,7 @@ map <leader>a: :Tab/:<cr>
 map <leader>a, :Tab/,<cr>
 
 Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_disable_when_zoomed = 1
 
 Plug 'morhetz/gruvbox'
 call plug#end()
