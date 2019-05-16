@@ -41,6 +41,13 @@ set cursorline
 set ignorecase
 set smartcase
 
+if &wildoptions == "pum"
+  cnoremap <expr> <up>   pumvisible() ? "<C-p>" : "\<up>"
+  cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+  cnoremap <expr> <left> pumvisible() ? "<up>" : "<left>"
+  cnoremap <expr> <right> pumvisible() ? "<C-e>" : "<right>"
+endif
+
 noremap <Up> :res +3<cr>
 noremap <Down> :res -3<cr> 
 noremap <Left> <nop>
@@ -83,7 +90,6 @@ Plug 'sbdchd/vim-shebang'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
-" Plug 'RRethy/vim-illuminate'
 
 Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,json setlocal commentstring=//\ %s
