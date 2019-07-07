@@ -1,9 +1,8 @@
 PREFIX=${1:-`pwd`/opt}
 BASE="http://data.moevis.cc/"
-PATH=$PREFIX/usr/go/bin:$PREFIX/bin:$PATH
+PATH=$PREFIX/usr/go/bin:$PREFIX/go/bin:$PREFIX/bin:$PATH
 
 mkdir -p $PREFIX/usr/go
-
 
 function download {
     if ! [ -f $1 ]; then
@@ -26,7 +25,7 @@ if ! exists go; then
     download go1.12.6.linux-amd64.tar.gz $PREFIX/usr/go
 fi
 
-echo "export PATH=$PREFIX/usr/go/bin:\$PATH" >> bashrc
+echo "export PATH=$PREFIX/usr/go/bin:$PREFIX/go/bin:\$PATH" >> bashrc
 echo "export GOPATH=$PREFIX/go" >> bashrc
 
 if ! exists node; then
@@ -39,6 +38,13 @@ fi
 
 if ! exists nvim; then
     download nvim-linux64.tar.gz $PREFIX
+fi
+
+if ! exists gopls; then
+    mkdir -p $PREFIX/go/src/github.com
+    mkdir -p $PREFIX/go/src/golang.org
+    download go-github.com.tar.gz $PREFIX/go/src/github.com
+    download go-golang.org.tar.gz $PREFIX/go/src/golang.org
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
