@@ -22,17 +22,6 @@ set writebackup
 set backupcopy=yes
 au BufWritePre * let &bex = '@' . strftime("%F")
 
-map <bslash>p :read! curl -s "`cat`" localhost:3333<cr>
-map <bslash>y :call SendToServer()<cr>
-
-command! ClipServer call SendToServer()
-
-function! SendToServer() range
-  let curl="localhost:3333 -d content="
-  let selection = s:get_visual_selection()
-  call system('curl -s '.curl.'"'.Base64Encode(selection).'"')
-endfunction
-
 " undo
 set undodir=~/.vim/undodir
 set undofile
@@ -63,7 +52,7 @@ endif
 let g:DirDiffExcludes = "node_modules,.*,CMakeFiles,build,__pycache__"
 autocmd FileType json syntax match Comment +\/\/.\+$+
 tnoremap <esc> <c-\><c-n><cr>
-map <leader>r :checktime<cr>
+map <leader>cc :checktime<cr>
 
 hi CursorLine ctermbg=248
 vnoremap <leader>y "+y<cr>
@@ -94,7 +83,13 @@ Plug 'sbdchd/vim-shebang'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
-" Plug 'RRethy/vim-illuminate'
+Plug 'reireias/vim-cheatsheet'
+let g:cheatsheet#cheat_file = '~/.config/nvim/cheatsheet'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+" Plug 'maxmellon/vim-jsx-pretty'
+Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'tpope/vim-commentary'
 autocmd FileType c,cpp,json setlocal commentstring=//\ %s
@@ -177,11 +172,12 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,
-      \                         fzf#vim#with_preview('right', '?'),
+      \                 fzf#vim#with_preview('right', '?'),
       \                 <bang>0)
 nnoremap <silent> K :call SearchWordWithAg()<CR>
 vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 cmap W w
+nmap <Leader>gg :Files<CR>
 
 function! SearchWordWithAg()
   execute 'Ag' expand('<cword>')
@@ -383,16 +379,19 @@ function! s:get_visual_selection()
   endtry
 endfunction
 
-function! Base64Encode(input)
-  if has("macunix")
-    return Base64Strip(system('base64', a:input))
-  elseif has("unix")
-    return Base64Strip(system('python -m base64', a:input))
-  else
-    echoerr "Unknown OS"
-  endif
-endfunction
+augroup secure_modeline_conflict_workaround
+  autocmd!
+  autocmd FileType help setlocal nomodeline
+augroup END
 
-function! Base64Strip(value)
-  return substitute(a:value, '\n$', '', 'g')
-endfunction
+map <f1> <nop>
+
+" Move visual block
+vnoremap <c-up> :m '>+1<CR>gv=gv
+vnoremap <c-down> :m '<-2<CR>gv=gv
+
+" go substitute because the default map for sleeping is silly
+nnoremap <leader>s :%s//g<Left><Left>
+nnoremap <leader>ss :%s//<Left>
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
