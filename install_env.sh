@@ -17,7 +17,7 @@ function download {
 }
 
 function exists {
-command -v "$1" >/dev/null 2>&1
+    command -v "$1" >/dev/null 2>&1
 }
 
 echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
@@ -25,7 +25,9 @@ echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
 if ! exists go; then
     download go1.12.6.linux-amd64.tar.gz $PREFIX/usr/go
 fi
+
 echo "export PATH=$PREFIX/usr/go/bin:\$PATH" >> bashrc
+echo "export GOPATH=$PREFIX/go" >> bashrc
 
 if ! exists node; then
     download node-v12.6.0-linux-x64.tar.xz $PREFIX
