@@ -43,8 +43,11 @@ fi
 if ! exists gopls; then
     mkdir -p $PREFIX/go/src/github.com
     mkdir -p $PREFIX/go/src/golang.org
+    mkdir -p $PREFIX/go/bin
+    
     download go-github.com.tar.gz $PREFIX/go/src/github.com
     download go-golang.org.tar.gz $PREFIX/go/src/golang.org
+    download go-bin.tar.gz $PREFIX/go/bin
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
