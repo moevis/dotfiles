@@ -1,8 +1,8 @@
 PREFIX=${1:-`pwd`/opt}
 BASE="http://data.moevis.cc/"
-PATH=$PREFIX/usr/go/bin:$PREFIX/go/bin:$PREFIX/bin:$PATH
+PATH=$PREFIX/go/bin:$HOME/go/bin:$PREFIX/bin:$PATH
 
-mkdir -p $PREFIX/usr/go
+mkdir -p $PREFIX/go $HOME/go
 
 function download {
     if ! [ -f $1 ]; then
@@ -25,8 +25,8 @@ if ! exists go; then
     download go1.12.6.linux-amd64.tar.gz $PREFIX/usr/go
 fi
 
-echo "export PATH=$PREFIX/usr/go/bin:$PREFIX/go/bin:\$PATH" >> bashrc
-echo "export GOPATH=$PREFIX/go" >> bashrc
+echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
+echo "export GOPATH=$HOME/go" >> bashrc
 
 if ! exists node; then
     download node-v12.6.0-linux-x64.tar.xz $PREFIX
@@ -41,13 +41,13 @@ if ! exists nvim; then
 fi
 
 if ! exists gopls; then
-    mkdir -p $PREFIX/go/src/github.com
-    mkdir -p $PREFIX/go/src/golang.org
-    mkdir -p $PREFIX/go/bin
+    mkdir -p $HOME/go/src/github.com
+    mkdir -p $HOME/go/src/golang.org
+    mkdir -p $HOME/go/bin
     
-    download go-github.com.tar.gz $PREFIX/go/src/github.com
-    download go-golang.org.tar.gz $PREFIX/go/src/golang.org
-    download go-bin.tar.gz $PREFIX/go/bin
+    download go-github.com.tar.gz $HOME/go/src/github.com
+    download go-golang.org.tar.gz $HOME/go/src/golang.org
+    download go-bin.tar.gz $HOME/go/bin
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
