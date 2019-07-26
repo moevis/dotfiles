@@ -22,7 +22,7 @@ function exists {
 echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
 
 if ! exists go; then
-    download go1.12.6.linux-amd64.tar.gz $PREFIX/usr/go
+    download go1.12.6.linux-amd64.tar.gz $PREFIX/go
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
