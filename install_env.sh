@@ -20,9 +20,10 @@ function exists {
 }
 
 echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
+echo "export GOPROXY=https://athens.azurefd.net" >> bashrc
 
 if ! exists go; then
-    download go1.12.6.linux-amd64.tar.gz $PREFIX/go
+    download go1.13beta1.linux-amd64.tar.gz $PREFIX/go
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
@@ -38,16 +39,6 @@ fi
 
 if ! exists nvim; then
     download nvim-linux64.tar.gz $PREFIX
-fi
-
-if ! exists gopls; then
-    mkdir -p $HOME/go/src/github.com
-    mkdir -p $HOME/go/src/golang.org
-    mkdir -p $HOME/go/bin
-    
-    download go-github.com.tar.gz $HOME/go/src/github.com
-    download go-golang.org.tar.gz $HOME/go/src/golang.org
-    download go-bin.tar.gz $HOME/go/bin
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
