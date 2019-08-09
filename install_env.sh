@@ -20,7 +20,7 @@ function exists {
 }
 
 echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
-echo "export GOPROXY=https://athens.azurefd.net" >> bashrc
+echo "export GOPROXY=https://goproxy.io" >> bashrc
 
 if ! exists go; then
     download go1.13beta1.linux-amd64.tar.gz $PREFIX/go
