@@ -21,6 +21,7 @@ function exists {
 
 echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
 echo "export GOPROXY=https://goproxy.io" >> bashrc
+echo "alias tmux='tmux -L moevis -f ~/.tmux.moevis.conf'" >> bashrc
 
 if ! exists go; then
     download go1.13beta1.linux-amd64.tar.gz $PREFIX/go
@@ -28,6 +29,7 @@ fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
 echo "export GOPATH=$HOME/go" >> bashrc
+echo "alias tmux='tmux -L moevis -f ~/.tmux.moevis.conf'" >> bashrc
 
 if ! exists node; then
     download node-v12.6.0-linux-x64.tar.xz $PREFIX
@@ -43,9 +45,9 @@ fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    wget https://raw.githubusercontent.com/moevis/dotfiles/master/.tmux-2.9.conf -O ~/.tmux.conf
+    wget https://raw.githubusercontent.com/moevis/dotfiles/master/.tmux-2.9.conf -O ~/.tmux.moevis.conf
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-    tmux source ~/.tmux.conf
+    tmux source ~/.tmux.moevis.conf
 fi
 
 if ! [ -f "$HOME/.config/nvim/init.vim" ]; then
