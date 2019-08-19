@@ -52,7 +52,7 @@ endif
 let g:DirDiffExcludes = "node_modules,.*,CMakeFiles,build,__pycache__"
 autocmd FileType json syntax match Comment +\/\/.\+$+
 tnoremap <esc> <c-\><c-n><cr>
-map <leader>cc :checktime<cr>
+map <leader>t :checktime<cr>
 
 hi CursorLine ctermbg=248
 vnoremap <leader>y "+y<cr>
@@ -156,18 +156,8 @@ let g:lightline = {
 Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'easymotion/vim-easymotion'
-" <Leader>f{char} to move to {char}
-map  <Leader>t <Plug>(easymotion-bd-f)
-nmap <Leader>t <Plug>(easymotion-overwin-f)
 map  <space> <Plug>(easymotion-sn)
 omap <space> <Plug>(easymotion-tn)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 command! -bang -nargs=* Ag
@@ -211,6 +201,8 @@ let g:formatdef_clangformat = '"clang-format -style=google"'
 map <leader>ff :Autoformat<cr>
 let g:formatters_python = ['black']
 let g:formatters_html = ['tidy']
+let g:formatdef_yamlfmt = '"yamlfmt"'
+let g:formatters_yaml = ['yamlfmt']
 
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 map <backspace> :nohl<cr>
@@ -260,6 +252,7 @@ endfunction
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'andrewstuart/vim-kubernetes'
 
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
