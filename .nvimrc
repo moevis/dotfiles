@@ -128,14 +128,9 @@ let g:NERDTreeIndicatorMapCustom = {
 
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'jiangmiao/auto-pairs'
-
-" Plug 'w0rp/ale'
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_enter = 8
-
 Plug 'tpope/vim-fugitive'
-
 Plug 'itchyny/vim-gitbranch'
+
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -250,7 +245,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'andrewstuart/vim-kubernetes'
 
