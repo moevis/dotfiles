@@ -24,7 +24,7 @@ echo "export GOPROXY=https://goproxy.io" >> bashrc
 echo "alias tmux='tmux -L moevis -f ~/.tmux.moevis.conf'" >> bashrc
 
 if ! exists go; then
-    download go1.13beta1.linux-amd64.tar.gz $PREFIX/go
+    download go1.13.1.linux-amd64.tar.gz $PREFIX/go
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
