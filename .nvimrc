@@ -83,8 +83,6 @@ Plug 'sbdchd/vim-shebang'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
-Plug 'reireias/vim-cheatsheet'
-let g:cheatsheet#cheat_file = '~/.config/nvim/cheatsheet'
 
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
@@ -187,9 +185,15 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
+Plug 'liuchengxu/vim-clap'
+
+Plug 'voldikss/vim-floaterm'
+map <f2> :FloatermToggle<cr>
 
 Plug 'fatih/vim-go'
 let g:go_doc_keywordprg_enabled = 0
+let g:go_gopls_complete_unimported = 1
+let g:go_auto_type_info = 1
 
 Plug 'Chiel92/vim-autoformat'
 let g:formatdef_clangformat = '"clang-format -style=google"'
@@ -199,7 +203,7 @@ let g:formatters_html = ['tidy']
 let g:formatdef_yamlfmt = '"yamlfmt"'
 let g:formatters_yaml = ['yamlfmt']
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 map <backspace> :nohl<cr>
 
 " Use <c-space> for trigger completion.
