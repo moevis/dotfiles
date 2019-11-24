@@ -49,10 +49,10 @@ if &wildoptions == "pum"
   cnoremap <expr> <right> pumvisible() ? "<C-e>" : "<right>"
 endif
 
-let g:DirDiffExcludes = "node_modules,.*,CMakeFiles,build,__pycache__"
+let g:DirDiffExcludes = "node_modules,.*,CMakeFiles,build,__pycache__,*.log"
 autocmd FileType json syntax match Comment +\/\/.\+$+
 tnoremap <esc> <c-\><c-n><cr>
-map <leader>t :checktime<cr>
+map <leader>cc :checktime<cr>
 
 hi CursorLine ctermbg=248
 vnoremap <leader>y "+y<cr>
