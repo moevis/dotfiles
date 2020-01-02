@@ -189,8 +189,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
 Plug 'liuchengxu/vim-clap'
 
-" Plug 'voldikss/vim-floaterm'
-" map <f2> :FloatermToggle<cr>
+Plug 'voldikss/vim-floaterm'
+map <f2> :FloatermToggle<cr>
 
 Plug 'fatih/vim-go'
 let g:go_doc_keywordprg_enabled = 0
@@ -253,7 +253,6 @@ endfunction
 
 Plug 'honza/vim-snippets'
 Plug 'andrewstuart/vim-kubernetes'
-Plug 'voldikss/vim-floaterm'
 
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
@@ -394,4 +393,5 @@ map <f3> :%s/"\zs.*\ze"/\=substitute(submatch(0), '\\\@<!"', '\\"', 'g')<cr>
 map <f8> :GoDecls<cr>
 
 let g:floaterm_position = 'center'
+let g:floaterm_winblend = 0
 let g:floaterm_borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
