@@ -33,14 +33,17 @@ echo "alias tmux='tmux -2 -L moevis -f ~/.tmux.moevis.conf'" >> bashrc
 
 if ! exists node; then
     download node-v12.6.0-linux-x64.tar.xz $PREFIX
+    rm -f node-v12.6.0-linux-x64.tar.xz
 fi
 
 if ! exists yarn; then
     download yarn-v1.16.0.tar.gz $PREFIX
+    rm -f yarn-v1.16.0.tar.gz
 fi
 
 if ! exists nvim; then
     download nvim-linux64.tar.gz $PREFIX
+    rm -f nvim-linux64.tar.gz
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
