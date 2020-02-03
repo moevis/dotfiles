@@ -25,6 +25,7 @@ echo "export EDITOR=nvim" >> bashrc
 
 if ! exists go; then
     download go1.13.1.linux-amd64.tar.gz $PREFIX/go
+    rm -f go1.13.1.linux-amd64.tar.gz
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
