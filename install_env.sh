@@ -23,6 +23,11 @@ echo "export PATH=$PREFIX/bin:\$PATH" > bashrc
 echo "export GOPROXY=https://goproxy.io" >> bashrc
 echo "export EDITOR=nvim" >> bashrc
 
+# using command 'tmux2' as an alias of 'tmux -f ~/.tmux.moevis.conf'
+echo "#!/bin/bash" > $PREFIX/opt/bin/tmux2
+echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/opt/bin/tmux2
+chmod +x $PREFIX/opt/bin/tmux2
+
 if ! exists go; then
     download go1.13.1.linux-amd64.tar.gz $PREFIX/go
     rm -f go1.13.1.linux-amd64.tar.gz
