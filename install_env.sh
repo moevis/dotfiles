@@ -29,22 +29,21 @@ echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/opt/bin/tmux2
 chmod +x $PREFIX/opt/bin/tmux2
 
 if ! exists go; then
-    download go1.13.1.linux-amd64.tar.gz $PREFIX/go
-    rm -f go1.13.1.linux-amd64.tar.gz
+    download go1.14.1.linux-amd64.tar.gz $PREFIX/go
+    rm -f go1.14.1.linux-amd64.tar.gz
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
 echo "export GOPATH=$HOME/go" >> bashrc
-echo "alias tmux='tmux -2 -L moevis -f ~/.tmux.moevis.conf'" >> bashrc
 
 if ! exists node; then
-    download node-v12.6.0-linux-x64.tar.xz $PREFIX
-    rm -f node-v12.6.0-linux-x64.tar.xz
+    download node-v13.12.0-linux-x64.tar.xz $PREFIX
+    rm -f node-v13.12.0-linux-x64.tar.xz
 fi
 
 if ! exists yarn; then
-    download yarn-v1.16.0.tar.gz $PREFIX
-    rm -f yarn-v1.16.0.tar.gz
+    download yarn-v1.22.4.tar.gz $PREFIX
+    rm -f yarn-v1.22.4.tar.gz
 fi
 
 if ! exists nvim; then
@@ -52,13 +51,18 @@ if ! exists nvim; then
     rm -f nvim-linux64.tar.gz
 fi
 
+if ! exists tmux; then
+    wget -O $PREFIX/opt/bin/tmux $BASE/tmux
+    chmod +x $PREFIX/opt/bin/tmux
+fi
+
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    wget https://raw.githubusercontent.com/moevis/dotfiles/master/.tmux-2.9.conf -O ~/.tmux.moevis.conf
+    wget $BASE/tmux.conf -O ~/.tmux.moevis.conf
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
     tmux source ~/.tmux.moevis.conf
 fi
 
 if ! [ -f "$HOME/.config/nvim/init.vim" ]; then
-    curl -fLo ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/moevis/dotfiles/master/.nvimrc
+    curl -fLo ~/.config/nvim/init.vim --create-dirs $BASE/nvimrc
 fi
