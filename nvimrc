@@ -8,8 +8,8 @@ let g:tmux_navigator_disable_when_zoomed = 1
 set nocompatible
 
 if filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim")) == 0
-  echoerr "Plug manager not installed, downloading from https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim "
-  call system("mkdir -p ~/.local/share/nvim/site/autoload/ && wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ~/.local/share/nvim/site/autoload/plug.vim")
+  echoerr "Plug manager not installed, downloading from http://data.moevis.cc/plug.vim"
+  call system("mkdir -p ~/.local/share/nvim/site/autoload/ && wget http://data.moevis.cc/plug.vim -O ~/.local/share/nvim/site/autoload/plug.vim")
   so ~/.local/share/nvim/site/autoload/plug.vim
 endif
 
