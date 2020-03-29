@@ -24,9 +24,9 @@ echo "export GOPROXY=https://goproxy.io" >> bashrc
 echo "export EDITOR=nvim" >> bashrc
 
 # using command 'tmux2' as an alias of 'tmux -f ~/.tmux.moevis.conf'
-echo "#!/bin/bash" > $PREFIX/opt/bin/tmux2
-echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/opt/bin/tmux2
-chmod +x $PREFIX/opt/bin/tmux2
+echo "#!/bin/bash" > $PREFIX/bin/tmux2
+echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/bin/tmux2
+chmod +x $PREFIX/bin/tmux2
 
 if ! exists go; then
     download go1.14.1.linux-amd64.tar.gz $PREFIX/go
@@ -52,8 +52,8 @@ if ! exists nvim; then
 fi
 
 if ! exists tmux; then
-    wget -O $PREFIX/opt/bin/tmux $BASE/tmux
-    chmod +x $PREFIX/opt/bin/tmux
+    wget -O $PREFIX/bin/tmux $BASE/tmux
+    chmod +x $PREFIX/bin/tmux
 fi
 
 if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
