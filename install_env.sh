@@ -1,8 +1,8 @@
 PREFIX=${1:-`pwd`/opt}
-BASE="http://data.moevis.cc/"
+BASE="http://data.moevis.cc"
 PATH=$PREFIX/go/bin:$HOME/go/bin:$PREFIX/bin:$PATH
 
-mkdir -p $PREFIX/go $HOME/go
+mkdir -p $PREFIX/go $HOME/go $PREFIX/bin
 
 function download {
     if ! [ -f $1 ]; then
