@@ -25,6 +25,7 @@ echo "export EDITOR=nvim" >> bashrc
 
 # using command 'tmux2' as an alias of 'tmux -f ~/.tmux.moevis.conf'
 echo "#!/bin/bash" > $PREFIX/bin/tmux2
+echo "trap '' INT TSTP" >> $PREFIX/bin/tmux2
 echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/bin/tmux2
 chmod +x $PREFIX/bin/tmux2
 
