@@ -113,7 +113,7 @@ let g:NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 let NERDTreeIgnore = ['\.pyc$', '\.o$']
 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ "Modified"  : "✹",
       \ "Staged"    : "✚",
       \ "Untracked" : "✭",
@@ -185,6 +185,7 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
 Plug 'liuchengxu/vim-clap'
@@ -239,6 +240,9 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <f1> :CocList diagnostics<cr>
 nmap <f9> :CocListResume<cr>
 nmap <f11>  <Plug>(coc-fix-current)"
+
+" need to install coc-prettier to run :Prettier command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Use K for show documentation in preview window
 nnoremap <silent> <leader>r :call <SID>show_documentation()<CR>
