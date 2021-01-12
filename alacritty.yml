@@ -1,0 +1,12 @@
+live_config_reload: true
+background_opacity: 0.9
+
+font:
+  size: 13.0
+
+key_bindings:
+  - { key: H, mods: Alt, chars: "\x1bh" }
+  - { key: L, mods: Alt, chars: "\x1bl" }
+  - { key: C, mods: Alt, chars: "\x1bc" }
+  - { key: M, mods: Alt, chars: "\x1bm" }
+  - { key: R, mods: Alt, chars: "\x1br" }
