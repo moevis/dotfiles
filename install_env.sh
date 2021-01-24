@@ -30,16 +30,16 @@ echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/bin/tmux2
 chmod +x $PREFIX/bin/tmux2
 
 if ! exists go; then
-    download go1.14.1.linux-amd64.tar.gz $PREFIX/go
-    rm -f go1.14.1.linux-amd64.tar.gz
+    download go1.15.3.linux-amd64.tar.gz $PREFIX/go
+    rm -f go1.15.3.linux-amd64.tar.gz
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
 echo "export GOPATH=$HOME/go" >> bashrc
 
 if ! exists node; then
-    download node-v13.12.0-linux-x64.tar.xz $PREFIX
-    rm -f node-v13.12.0-linux-x64.tar.xz
+    download node-v15.6.0-linux-x64.tar.xz $PREFIX
+    rm -f node-v15.6.0-linux-x64.tar.xz
 fi
 
 if ! exists yarn; then
