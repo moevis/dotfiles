@@ -1,7 +1,6 @@
 set exrc
 
 set secure
-set background=dark
 set hidden
 let g:tmux_navigator_disable_when_zoomed = 1
 
@@ -256,7 +255,6 @@ function! s:show_documentation()
 endfunction
 
 Plug 'honza/vim-snippets'
-Plug 'andrewstuart/vim-kubernetes'
 
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window='vert bo 50new'
@@ -292,6 +290,9 @@ set termguicolors
 highlight Normal guibg=None ctermbg=None
 
 colorscheme gruvbox
+let g:gruvbox_transparent_bg=1
+highlight Normal guibg=none
+highlight NonText guibg=none
 
 function! VisualSelection(direction) range
   let l:saved_reg = @"
