@@ -52,6 +52,11 @@ if ! exists nvim; then
     rm -f nvim-linux64.tar.gz
 fi
 
+if ! exists rg; then
+    download ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz $PREFIX
+    rm -rf ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
+fi
+
 if ! exists tmux; then
     wget -O $PREFIX/bin/tmux $BASE/tmux
     chmod +x $PREFIX/bin/tmux
