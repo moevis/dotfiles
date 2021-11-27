@@ -62,6 +62,7 @@ map("n", "<leader>w", "<cmd>lua require('telescope.builtin').git_files({show_unt
 map("n", "<leader>s", "<cmd>lua require('telescope.builtin').git_status()<CR>", opts)
 map("n", "<leader>e", "<cmd>lua require('telescope.builtin').file_browser()<CR>", opts)
 map("n", "<leader>t", "<cmd>lua require('telescope.builtin').builtin() <CR>", opts)
+map("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep() <CR>", opts)
 
 map("n", "<leader>nn", "<cmd>NvimTreeToggle<CR>", opts)
 
