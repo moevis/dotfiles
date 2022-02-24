@@ -30,8 +30,8 @@ echo 'tmux -2 -L moevis -f ~/.tmux.moevis.conf "$@"' >> $PREFIX/bin/tmux2
 chmod +x $PREFIX/bin/tmux2
 
 if ! exists go; then
-    download go1.15.3.linux-amd64.tar.gz $PREFIX/go
-    rm -f go1.15.3.linux-amd64.tar.gz
+    download go1.18rc1.linux-amd64.tar.gz $PREFIX/go
+    rm -f go1.18rc1.linux-amd64.tar.gz
 fi
 
 echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
