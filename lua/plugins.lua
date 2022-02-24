@@ -48,18 +48,12 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-
   use 'fatih/vim-go'
-
   use 'windwp/nvim-autopairs'
-
   use 'folke/trouble.nvim'
-
   use 'sbdchd/neoformat'
-
-  use 'blackCauldron7/surround.nvim'
-
   use 'ray-x/lsp_signature.nvim'
-
   use 'f-person/git-blame.nvim'
+  use 'tpope/vim-surround'
+  use 'j-hui/fidget.nvim'
 end)

@@ -4,7 +4,6 @@ vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 vim.cmd([[highlight NvimTreeFolderIcon guibg=blue]])
 vim.cmd([[let g:go_list_type = "quickfix"]])
-vim.cmd([[let g:go_gopls_enabled = 0]])
 vim.cmd([[let g:go_def_mapping_enabled = 0]])
 vim.cmd([[let g:go_doc_keywordprg_enabled = 0    ]])
 
@@ -52,7 +51,6 @@ map("v", "<leader>p", '"+p<cr>', { noremap = true })
 map("v", "<leader>x", '"_d<cr>', { noremap = true })
 map("n", "gp", "`[v`]", {})
 map("n", "<leader>l", ":set invnumber<cr>", {})
-map("n", "<leader>d", ":SignifyToggleHighlight<cr>", {})
 map("n", "<backspace>", ":nohl<cr>", { noremap = true })
 
 -- telescope
@@ -60,15 +58,12 @@ local opts = { noremap = true, silent = true }
 
 map("n", "<leader>w", "<cmd>lua require('telescope.builtin').git_files({show_untracked = false})<CR>", opts)
 map("n", "<leader>s", "<cmd>lua require('telescope.builtin').git_status()<CR>", opts)
-map("n", "<leader>e", "<cmd>lua require('telescope.builtin').file_browser()<CR>", opts)
-map("n", "<leader>t", "<cmd>lua require('telescope.builtin').builtin() <CR>", opts)
 map("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep() <CR>", opts)
+map("n", "<leader>k", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts)
 
 map("n", "<leader>nn", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- nvim-tree
-vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_indent_markers = 0
 vim.g.nvim_tree_git_hl = 1
@@ -94,14 +89,26 @@ vim.g.nvim_tree_show_icons = {
 	-- ['folder_arrows']= 0,
 }
 
-require("nvim-tree").setup({})
+require("nvim-tree").setup({
+    diagnostics = {
+        enable = false,
+        icons = {
+            hint = "ÔÅ™",
+            info = "ÔÅö",
+            warning = "ÔÅ±",
+            error = "ÔÅó"
+        }
+    },
+    git = {
+        custom = {".git", "node_modules", ".cache"},
+        ignore = true
+    }
+})
 
 require("Comment").setup({})
 
 require("lualine").setup({
-	options = {
-		theme = "gruvbox",
-	},
+	options = { theme = "gruvbox" },
 })
 
 require("colorizer").setup({})
@@ -320,16 +327,10 @@ map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-map("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 -- tmux Navigator
 require("Navigator").setup({})
@@ -371,21 +372,12 @@ vim.cmd([[hi CmpItemMenu ctermfg=White]])
 require("trouble").setup({})
 
 map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
-map("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", opts)
-map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", opts)
-
 map("n", "<leader>ff", "<cmd>Neoformat<cr>", opts)
 
 require("nvim-treesitter.configs").setup({
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	rainbow = {
-		enable = true,
-	},
+	highlight = { enable = true },
+	indent = { enable = true },
+	rainbow = { enable = true },
 })
 
-require("surround").setup({ mappings_style = "surround" })
+require "fidget".setup {}
