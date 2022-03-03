@@ -48,12 +48,23 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'fatih/vim-go'
-  use 'windwp/nvim-autopairs'
-  use 'folke/trouble.nvim'
-  use 'sbdchd/neoformat'
   use 'ray-x/lsp_signature.nvim'
-  use 'f-person/git-blame.nvim'
+
+  use 'fatih/vim-go'
+
+  use 'windwp/nvim-autopairs'
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
+
+  use 'folke/trouble.nvim'
+
+  use 'sbdchd/neoformat'
+
   use 'tpope/vim-surround'
+
   use 'j-hui/fidget.nvim'
 end)
+
