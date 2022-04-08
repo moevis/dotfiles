@@ -38,13 +38,8 @@ echo "export PATH=$PREFIX/go/bin:$HOME/go/bin:\$PATH" >> bashrc
 echo "export GOPATH=$HOME/go" >> bashrc
 
 if ! exists node; then
-    download node-v15.6.0-linux-x64.tar.xz $PREFIX
-    rm -f node-v15.6.0-linux-x64.tar.xz
-fi
-
-if ! exists yarn; then
-    download yarn-v1.22.4.tar.gz $PREFIX
-    rm -f yarn-v1.22.4.tar.gz
+    download node-v17.9.0-linux-x64.tar.xz $PREFIX
+    rm -f node-v17.9.0-linux-x64.tar.xz	
 fi
 
 if ! exists nvim; then
@@ -69,6 +64,7 @@ if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
     tmux source ~/.tmux.moevis.conf
 fi
 
-if ! [ -f "$HOME/.config/nvim/init.vim" ]; then
-    curl -fLo ~/.config/nvim/init.vim --create-dirs $BASE/nvimrc
+if ! [ -f "$HOME/.config/nvim/init.lua" ]; then
+    curl -fLo ~/.config/nvim/init.lua --create-dirs $BASE/init.lua
+    curl -fLo ~/.config/nvim/lua/plugins.lua --create-dirs $BASE/plugins.lua
 fi
