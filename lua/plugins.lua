@@ -21,8 +21,6 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'} },
   }
 
-  use "mhinz/vim-startify"
-
   use 'numToStr/Comment.nvim'
 
   use 'hoob3rt/lualine.nvim'
@@ -66,5 +64,13 @@ return require('packer').startup(function()
   use 'tpope/vim-surround'
 
   use 'j-hui/fidget.nvim'
+
+  use 'f-person/git-blame.nvim'
+
+  use 'mtdl9/vim-log-highlighting'
+
+  use 'moevis/json.nvim'
+  
+  use 'moevis/base64.nvim'
 end)
 

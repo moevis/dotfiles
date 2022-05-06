@@ -2,10 +2,9 @@ require("plugins")
 
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
-vim.cmd([[highlight NvimTreeFolderIcon guibg=blue]])
 vim.cmd([[let g:go_list_type = "quickfix"]])
 vim.cmd([[let g:go_def_mapping_enabled = 0]])
-vim.cmd([[let g:go_doc_keywordprg_enabled = 0    ]])
+vim.cmd([[let g:go_doc_keywordprg_enabled = 0 ]])
 
 vim.g.mapleader = ","
 local map = vim.api.nvim_set_keymap
@@ -92,68 +91,26 @@ vim.g.nvim_tree_show_icons = {
 require("nvim-tree").setup({
     diagnostics = {
         enable = true,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = ""
-        }
+        icons = { hint = "", info = "", warning = "", error = "" }
     },
-    git = {
-        custom = {".git", "node_modules", ".cache"},
-        ignore = true
-    }
+    git = { custom = {".git", "node_modules", ".cache"}, ignore = true }
 })
 
 require("Comment").setup({})
 
 require("lualine").setup({
-	options = { theme = "gruvbox" },
+	options = {
+		theme = "gruvbox",
+		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+	},
+	sections = {
+		lualine_b = { "branch", "diff", "diagnostics" },
+	},
+	extensions = { "quickfix", "nvim-tree" },
 })
 
 require("colorizer").setup({})
-
--- refactor
-local refactor = require("refactoring")
-refactor.setup({})
-
--- telescope refactoring helper
-local function refactor(prompt_bufnr)
-	local content = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
-	require("telescope.actions").close(prompt_bufnr)
-	require("refactoring").refactor(content.value)
-end
-
-M = {}
-M.refactors = function()
-	local opts = require("telescope.themes").get_cursor() -- set personal telescope options
-	require("telescope.pickers").new(opts, {
-		prompt_title = "refactors",
-		finder = require("telescope.finders").new_table({
-			results = require("refactoring").get_refactors(),
-		}),
-		sorter = require("telescope.config").values.generic_sorter(opts),
-		attach_mappings = function(_, map)
-			map("i", "<CR>", refactor)
-			map("n", "<CR>", refactor)
-			return true
-		end,
-	}):find()
-end
-
-map(
-	"v",
-	"<Leader>re",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-	{ noremap = true, silent = true, expr = false }
-)
-map(
-	"v",
-	"<Leader>rf",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-	{ noremap = true, silent = true, expr = false }
-)
-map("v", "<Leader>rt", [[ <Esc><Cmd>lua M.refactors()<CR>]], { noremap = true, silent = true, expr = false })
 
 -- LSPConfig
 require("lsp_signature").setup()
@@ -168,6 +125,31 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- Lua language server config
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+nvim_lsp.sumneko_lua.setup({
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = "LuaJIT",
+				-- Setup your lua path
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+		},
+	},
+})
+
 
 -- Set completeopt to have a better completion experience
 o.completeopt = "menu,menuone,noselect"
@@ -336,8 +318,6 @@ map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", 
 
 -- tmux Navigator
 require("Navigator").setup({})
-
-local opts = { noremap = true, silent = true }
 
 map("n", "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
 map("n", "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
