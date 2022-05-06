@@ -63,24 +63,16 @@ map("n", "<leader>k", "<cmd>lua require('telescope.builtin').grep_string()<CR>",
 map("n", "<leader>nn", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- nvim-tree
-vim.g.nvim_tree_quit_on_open = 1
-vim.g.nvim_tree_indent_markers = 0
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_add_trailing = 1
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_disable_window_picker = 0
 vim.g.nvim_tree_icon_padding = " "
 vim.g.nvim_tree_symlink_arrow = " >> "
 vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.nvim_tree_create_in_closed_folder = 0
 vim.g.nvim_tree_refresh_wait = 500
 vim.g.nvim_tree_special_files = { ["README.md"] = 1, ["package.json"] = 1, ["Makefile"] = 1 }
-vim.g.nvim_tree_window_picker_exclude = {
-	["filetype"] = { "notify", "packer", "qf", "Trouble" },
-	["buftype"] = { "terminal", "Trouble" },
-}
-
 vim.g.nvim_tree_show_icons = {
 	["git"] = 1,
 	["folders"] = 1,
@@ -93,7 +85,22 @@ require("nvim-tree").setup({
         enable = true,
         icons = { hint = "", info = "", warning = "", error = "" }
     },
-    git = { custom = {".git", "node_modules", ".cache"}, ignore = true }
+	git = { ignore = true },
+	filters = { custom = { ".git", "node_modules", ".cache" } },
+	renderer = { indent_markers = { enable = true }, },
+	actions = {
+		open_file = {
+    		quit_on_open = true,
+			window_picker = {
+				enable = true,
+				exclude = {
+					["filetype"] = { "notify", "packer", "qf", "Trouble" },
+					["buftype"] = { "terminal", "Trouble" },
+				},
+			},
+		},
+	},
+
 })
 
 require("Comment").setup({})
@@ -360,6 +367,13 @@ require("nvim-treesitter.configs").setup({
 	highlight = { enable = true },
 	indent = { enable = true },
 	rainbow = { enable = true },
+	textsubjects = {
+		enable = true,
+		keymaps = {
+			["."] = "textsubjects-smart",
+			[";"] = "textsubjects-container-outer",
+		},
+	},
 })
 
 require "fidget".setup {}

@@ -31,13 +31,13 @@ return require('packer').startup(function()
 
   use 'numToStr/Navigator.nvim'
 
+  use 'nvim-treesitter/nvim-treesitter'
   use {
     "ThePrimeagen/refactoring.nvim",
-    requires = {
-        {"nvim-lua/plenary.nvim"},
-        {"nvim-treesitter/nvim-treesitter"}
-    }
+    requires = { {"nvim-lua/plenary.nvim"} }
   }
+  use 'RRethy/nvim-treesitter-textsubjects'
+  use 'p00f/nvim-ts-rainbow'
 
   use 'onsails/lspkind-nvim'
   use 'neovim/nvim-lspconfig'
