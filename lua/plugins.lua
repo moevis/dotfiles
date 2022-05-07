@@ -7,38 +7,23 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
-  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-
-  use 'will133/vim-dirdiff'
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} },
-  }
-
-  use 'numToStr/Comment.nvim'
-
+  -- ui
+  use { "ellisonleao/gruvbox.nvim", requires = "rktjmp/lush.nvim" }
+  use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
+  use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'hoob3rt/lualine.nvim'
-
-  use 'wellle/targets.vim'
-
   use 'norcalli/nvim-colorizer.lua'
-
   use 'numToStr/Navigator.nvim'
+  use 'folke/trouble.nvim'
+  use 'f-person/git-blame.nvim'
+  use 'will133/vim-dirdiff'
+  use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', }
 
+  -- better code editing
   use 'nvim-treesitter/nvim-treesitter'
-  use {
-    "ThePrimeagen/refactoring.nvim",
-    requires = { {"nvim-lua/plenary.nvim"} }
-  }
+  use { "ThePrimeagen/refactoring.nvim", requires = "nvim-lua/plenary.nvim" }
   use 'RRethy/nvim-treesitter-textsubjects'
   use 'p00f/nvim-ts-rainbow'
-
   use 'onsails/lspkind-nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
@@ -47,30 +32,22 @@ return require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'ray-x/lsp_signature.nvim'
-
-  use 'fatih/vim-go'
-
   use 'windwp/nvim-autopairs'
-
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-  }
-
-  use 'folke/trouble.nvim'
-
-  use 'sbdchd/neoformat'
-
-  use 'tpope/vim-surround'
-
   use 'j-hui/fidget.nvim'
 
-  use 'f-person/git-blame.nvim'
-
-  use 'mtdl9/vim-log-highlighting'
-
+  -- toolset
   use 'moevis/json.nvim'
-  
   use 'moevis/base64.nvim'
+  use 'sbdchd/neoformat'
+  use 'tpope/vim-surround'
+  use 'numToStr/Comment.nvim'
+  use 'wellle/targets.vim'
+
+  -- language specific
+  use 'mtdl9/vim-log-highlighting'
+  use 'fatih/vim-go'
+
+  -- copy via ssh
+  use 'ojroques/vim-oscyank'
 end)
 

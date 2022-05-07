@@ -45,6 +45,7 @@ o.autoindent = true
 o.ignorecase = true
 o.smartcase = true
 
+map("v", "<leader>o", ':OSCYank<cr>', { noremap = true })
 map("v", "<leader>y", '"+y<cr>', { noremap = true })
 map("v", "<leader>p", '"+p<cr>', { noremap = true })
 map("v", "<leader>x", '"_d<cr>', { noremap = true })
@@ -90,7 +91,7 @@ require("nvim-tree").setup({
 	renderer = { indent_markers = { enable = true }, },
 	actions = {
 		open_file = {
-    		quit_on_open = true,
+    	quit_on_open = true,
 			window_picker = {
 				enable = true,
 				exclude = {
