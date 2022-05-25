@@ -1,4 +1,3 @@
-
 font:
   normal:
     family: SauceCodePro Nerd Font
@@ -56,3 +55,10 @@ key_bindings:
   - { key: C, mods: Alt, chars: "\x1bc" }
   - { key: M, mods: Alt, chars: "\x1bm" }
   - { key: R, mods: Alt, chars: "\x1br" }
+  - { key: Period, mods: Alt, chars: "\x1b." }
+  - { key: Slash, mods: Alt, chars: "\x1b/" }
+  - { key: S, mods: Alt, chars: "\x1bs" }
+  - { key: V, mods: Alt, chars: "\x1bv" }
+  - { key: P, mods: Alt, chars: "\x1bp" }
+  - { key: T, mods: Alt, chars: "\x1bt" }
+  - { key: N, mods: Command, action: CreateNewWindow }
