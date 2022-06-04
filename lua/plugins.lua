@@ -18,6 +18,12 @@ return require('packer').startup(function()
   use 'f-person/git-blame.nvim'
   use 'will133/vim-dirdiff'
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', }
+  use "rcarriga/nvim-notify"
+  use("petertriho/nvim-scrollbar")
+  use "xiyaowong/nvim-transparent"
+  use "RishabhRD/popfix"
+  use {"hood/popui.nvim", require={"RishabhRD/popfix"}}
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- better code editing
   use 'nvim-treesitter/nvim-treesitter'
@@ -42,10 +48,14 @@ return require('packer').startup(function()
   use 'tpope/vim-surround'
   use 'numToStr/Comment.nvim'
   use 'wellle/targets.vim'
+  use "sindrets/diffview.nvim"
+  use "NTBBloodbath/rest.nvim"
+
 
   -- language specific
   use 'mtdl9/vim-log-highlighting'
   use 'fatih/vim-go'
+  use "b0o/schemastore.nvim"
 
   -- copy via ssh
   use 'ojroques/vim-oscyank'

@@ -410,3 +410,13 @@ require('gitsigns').setup{
     map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+
+require("scrollbar").setup()
+require("transparent").setup({ enable = true })
+require("indent_blankline").setup({ show_end_of_line = true })
+
+vim.notify = require("notify")
+vim.opt.list = true
+vim.opt.listchars:append("eol:↴")
+vim.ui.select = require("popui.ui-overrider")
+vim.ui.input = require("popui.input-overrider")
