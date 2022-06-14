@@ -64,23 +64,6 @@ map("n", "<leader>k", "<cmd>lua require('telescope.builtin').grep_string()<CR>",
 map("n", "<leader>nn", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- nvim-tree
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_add_trailing = 1
-vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_icon_padding = " "
-vim.g.nvim_tree_symlink_arrow = " >> "
-vim.g.nvim_tree_respect_buf_cwd = 1
-vim.g.nvim_tree_create_in_closed_folder = 0
-vim.g.nvim_tree_refresh_wait = 500
-vim.g.nvim_tree_special_files = { ["README.md"] = 1, ["package.json"] = 1, ["Makefile"] = 1 }
-vim.g.nvim_tree_show_icons = {
-	["git"] = 1,
-	["folders"] = 1,
-	["files"] = 0,
-	-- ['folder_arrows']= 0,
-}
-
 require("nvim-tree").setup({
     diagnostics = {
         enable = true,
@@ -101,7 +84,6 @@ require("nvim-tree").setup({
 			},
 		},
 	},
-
 })
 
 require("Comment").setup({})
