@@ -305,6 +305,7 @@ map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 
+map('n', 'gl', '<cmd>GoToFile<CR>', opts)
 
 -- tmux Navigator
 require("Navigator").setup({})

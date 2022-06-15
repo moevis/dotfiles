@@ -44,6 +44,7 @@ return require('packer').startup(function()
   -- toolset
   use 'moevis/json.nvim'
   use 'moevis/base64.nvim'
+  use 'moevis/smartjump.nvim'
   use 'sbdchd/neoformat'
   use 'tpope/vim-surround'
   use 'numToStr/Comment.nvim'
