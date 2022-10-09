@@ -15,7 +15,6 @@ return require('packer').startup(function()
   use 'norcalli/nvim-colorizer.lua'
   use 'numToStr/Navigator.nvim'
   use 'folke/trouble.nvim'
-  use 'f-person/git-blame.nvim'
   use 'will133/vim-dirdiff'
   use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', }
   use "rcarriga/nvim-notify"
@@ -35,8 +34,6 @@ return require('packer').startup(function()
   use 'williamboman/nvim-lsp-installer'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'ray-x/lsp_signature.nvim'
   use 'windwp/nvim-autopairs'
   use 'j-hui/fidget.nvim'
